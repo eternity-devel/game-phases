@@ -6,6 +6,7 @@ Each phase has a prerequisite, and until that phase is unlocked, all content ins
 
 Game Phases relies on KubeJS for configuration and setup. All Game Phase scripts are in `server_scripts`.
 For more information on setting up Game Phases, [visit the wiki page](https://github.com/Draylar/game-phases/wiki/).
+
 ---
 ## Warning
 Use on own risks.
@@ -13,6 +14,7 @@ Use on own risks.
 This version is modified for 1.18.2 and try to fix some bugs. It's for my own purposes.
 I'm very new in fabric modding, so there may be bugs, not optimized code etc.
 At the moment, I'm not planning to maintain this mod/code or to regularly update it.
+
 ---
 ## Dependencies
 
