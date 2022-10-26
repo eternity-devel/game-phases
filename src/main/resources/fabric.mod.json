@@ -3,9 +3,9 @@
   "id": "game-phases",
   "version": "${version}",
   "name": "Game Phases",
-  "description": "",
+  "description": "Forked version from Draylar's game-phases mod.",
   "authors": [
-    "Draylar"
+    "Draylar, BoesesET"
   ],
   "contact": {},
   "license": "MIT",
@@ -13,10 +13,10 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "draylar.gamephases.GamePhasesClient"
+      "boeseset.gamephases.GamePhasesClient"
     ],
     "main": [
-      "draylar.gamephases.GamePhases"
+      "boeseset.gamephases.GamePhases"
     ]
   },
   "mixins": [
