@@ -8,7 +8,7 @@ public interface PlayerDataProvider {
     void set(String phase, boolean status);
     void set(Map<String, Boolean> all);
 
-    Map getPhases();
+    Map<String, Boolean> getPhases();
 
     void sync();
 }

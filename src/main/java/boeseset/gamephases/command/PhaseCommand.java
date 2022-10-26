@@ -12,6 +12,9 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.Formatting;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PhaseCommand {
 
     public static void init() {
@@ -31,7 +34,7 @@ public class PhaseCommand {
                                 PlayerEntity target = EntityArgumentType.getPlayer(context, "player");
                                 String phase = StringArgumentType.getString(context, "phase");
                                 GamePhases.getPhaseData(target).set(phase, true);
-                                context.getSource().sendFeedback(new LiteralText(String.format("Granted phase \"%s\" to %s.", phase, target.getName().asString())).formatted(Formatting.GRAY), false);
+                                context.getSource().sendFeedback(new LiteralText(String.format("Granted phase \"§6%s§d\" to §a%s§d.", phase, target.getName().asString())).formatted(Formatting.LIGHT_PURPLE), false);
                                 return 1;
                             })))
                     .build();
@@ -47,13 +50,25 @@ public class PhaseCommand {
                                 PlayerEntity target = EntityArgumentType.getPlayer(context, "player");
                                 String phase = StringArgumentType.getString(context, "phase");
                                 GamePhases.getPhaseData(target).set(phase, false);
-                                context.getSource().sendFeedback(new LiteralText(String.format("Revoked phase \"%s\" from %s.", phase, target.getName().asString())).formatted(Formatting.GRAY), false);
+                                context.getSource().sendFeedback(new LiteralText(String.format("Revoked phase \"§6%s§d\" from §a%s§d.", phase, target.getName().asString())).formatted(Formatting.LIGHT_PURPLE), false);
                                 return 1;
                             })))
                     .build();
 
+            LiteralCommandNode<ServerCommandSource> list = CommandManager.literal("list")
+                    .then(CommandManager.argument("player", EntityArgumentType.player())
+                            .executes(context -> {
+                                    PlayerEntity target = EntityArgumentType.getPlayer(context, "player");
+                                    Map<String, Boolean> phasesList = GamePhases.getPhaseData(target).getPhases();
+                                    while (phasesList.values().remove(false)) ;
+                                    context.getSource().sendFeedback(new LiteralText(String.format("§a%s's §dPhases: \"§6%s§d\".", target.getName().asString().formatted(Formatting.LIGHT_PURPLE), phasesList.keySet().toString().formatted(Formatting.GOLD))), false);
+                                    return 1;
+                            }))
+                    .build();
+
             root.addChild(revoke);
             root.addChild(grant);
+            root.addChild(list);
             dispatcher.getRoot().addChild(root);
         });
     }
